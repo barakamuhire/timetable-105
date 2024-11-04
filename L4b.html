@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Timetable</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+    }
+    .container {
+      width: 400px;
+      max-width: 100%;
+      text-align: center;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    h2 {
+      font-size: 1.8em;
+      color: #004080;
+      margin-bottom: 15px;
+    }
+    select {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      color: #333;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9fafb;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    select:focus {
+      outline: none;
+      border-color: #004080;
+    }
+    .timetable {
+      background-color: #f9fafb;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: left;
+    }
+    .timetable h3 {
+      font-size: 1.6em;
+      color: #004080;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .timetable ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .timetable li {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e0e0e0;
+      color: #333;
+      font-size: 1.1em;
+    }
+    .timetable li:last-child {
+      border-bottom: none;
+    }
+    .time-slot {
+      font-weight: bold;
+      color: #004080;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Weekly Timetable</h2>
+    <select id="daySelect" onchange="showTimetable()">
+      <option value="">-- Select a Day --</option>
+      <option value="monday">Monday</option>
+      <option value="tuesday">Tuesday</option>
+      <option value="wednesday">Wednesday</option>
+      <option value="thursday">Thursday</option>
+      <option value="friday">Friday</option>
+    </select>
+    <div id="timetable" class="timetable">
+      <h3>Timetable</h3>
+      <ul id="subjectList"></ul>
+    </div>
+  </div>
+
+  <script>
+    const timetableData = {
+      monday: ["DSA9", "DSA9", "DDB35", "DDB35", "DDB35", "Break time", "DDB35", "DBD35", "DBS", "Lunch time", "RSL", "DBA"],
+      tuesday: ["DBA13", "DBA13", "FR22", "DDB35", "DDB35", "Break time", "KINY24", "NET31", "NET31", "Lunch time", "Co curriculum", "Co curriculum"],
+      wednesday: ["BD", "PHP", "PHP", "MATH", "MATH", "Break time", "WS", "WS", "ENG", "Lunch time", "NET", "NET"],
+      thursday: ["DBS", "DBS", "REL", "REL", "CS", "Break time", "DSA", "DSA", "WS", "Lunch time", "PHP", "PHP"],
+      friday: ["DBA", "DBA", "DBA", "DSA", "CITZ", "Break time", "PHYs", "PHP", "PHP", "Lunch time", "WS", "WS"]
+    };
+
+    function showTimetable() {
+      const day = document.getElementById("daySelect").value;
+      const subjectList = document.getElementById("subjectList");
+      subjectList.innerHTML = "";
+
+      if (timetableData[day]) {
+        timetableData[day].forEach(subject => {
+          const listItem = document.createElement("li");
+          listItem.innerHTML = `<span class="time-slot">${subject}</span>`;
+          subjectList.appendChild(listItem);
+        });
+      }
+    }
+  </script>
+</body>
+</html>

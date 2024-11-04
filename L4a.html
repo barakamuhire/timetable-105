@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable</title>
+    <style>
+        /* Reset and Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Container Styling */
+        .container {
+            width: 320px;
+            padding: 25px;
+            background-color: #fff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        /* Title */
+        h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* Select Dropdown */
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        select:focus {
+            border-color: #74ebd5;
+        }
+
+        /* Button Styling */
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #74ebd5;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #4fc3c9;
+        }
+
+        /* Schedule Display */
+        .schedule {
+            margin-top: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+        .schedule strong {
+            display: block;
+            font-size: 1.2rem;
+            color: #4fc3c9;
+            margin-bottom: 10px;
+        }
+
+        /* Schedule Item Styling */
+        .schedule-item {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+        .schedule-item:hover {
+            background-color: #f0f8ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Select Day</h2>
+        <select id="daySelect">
+            <option value="">--Choose a Day--</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+        </select>
+        <button onclick="showSchedule()">Show Schedule</button>
+        <div class="schedule" id="schedule"></div>
+    </div>
+
+    <script>
+        const timetable = {
+            Monday: ["Kiny", "DDB", "NET", "NET", "NET", "Break time", "DSA", "DSA", "CS", "Lunch time", "DSA", "DSA"],
+            Tuesday: ["WS", "WS", "DBS", "DBS", "DBA", "Break time", "MATH", "MATH", "DSA", "Lunch time", "Co curriculum", "Co curriculum"],
+            Wednesday: ["DBS", "BD", "FR", "DBS", "DBS", "Break time", "NET", "ENG", "DDB", "Lunch time", "PHP", "PHP"],
+            Thursday: ["REL", "REL", "DDB", "DDB", "PHY", "Break time", "DBA", "DBA", "DBA", "Lunch time", "DDB", "DDB"],
+            Friday: ["DSA", "DSA", "DSA", "CITIZEN", "DBS", "Break time", "DBS", "DBS", "NET", "Lunch time", "RSL", "KINY"]
+        };
+
+        function showSchedule() {
+            const day = document.getElementById("daySelect").value;
+            const scheduleDiv = document.getElementById("schedule");
+            if (day && timetable[day]) {
+                scheduleDiv.innerHTML = `<strong>${day} Schedule:</strong>` + timetable[day].map(item => `<div class="schedule-item">${item}</div>`).join("");
+            } else {
+                scheduleDiv.innerHTML = "Please select a day.";
+            }
+        }
+    </script>
+</body>
+</html>
